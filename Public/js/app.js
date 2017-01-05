@@ -21,13 +21,15 @@ $(function() {
 function Chat(host) {
   this.interval = null;
   this.ws = new WebSocket('ws://' + host);
+
   this.ws.onopen = function() {
     console.log("Socket is open");
   };
 
   this.ws.onmessage = function(event) {
-    var data = JSON.parse(event.data);
-    this.append(data.message, true);
+    var message = event.data;
+    console.log(message);
+    chat.append(message, true);
   }
 
   this.send = function(message) {
@@ -43,8 +45,8 @@ function Chat(host) {
     $('.chat-panel').append(dotsDiv);
 
     this.interval = setInterval(function() {
-      dotsDiv.text(dotsDiv.text + '.')
-      if (dotsDiv.text.length == 4) {
+      dotsDiv.text(dotsDiv.text() + '.')
+      if (dotsDiv.text().length == 4) {
         dotsDiv.text('');
       }
     }, 100);
@@ -57,7 +59,7 @@ function Chat(host) {
 
   this.append = function(message, isAnswer) {
     var date = new Date();
-    var time = date.format('hh:mm');
+    var time = moment().format('h:mm');
     var text = '[' + time + '] ' + message;
     var div = $('<div>').addClass('chat-message');
 
@@ -65,6 +67,7 @@ function Chat(host) {
       div.addClass('answer');
     }
 
+    console.log(text);
     div.text(text);
 
     $('.chat-panel').append(div);
@@ -75,7 +78,7 @@ function Chat(host) {
       this.startAnimation()
     }
 
-    var firstDiv = $('.messages')[0];
-    objDiv.scrollTop = objDiv.scrollHeight;
+    var firstDiv = $('.chat-panel')[0];
+    firstDiv.scrollTop = firstDiv.scrollHeight;
   }
 };
