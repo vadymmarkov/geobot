@@ -5,7 +5,7 @@ var chat = new Chat(window.location.host + "/chat");
 $(function() {
   $("form").submit(function(event) {
     event.preventDefault();
-    var input = $(this).find('input');
+    var input = $(this).find('input:text');
     var message = input.val();
     if (message.length == 0 || message.length >= 256) {
       return;
