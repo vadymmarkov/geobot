@@ -5,22 +5,18 @@
 }
 
 #export("body") {
-	<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
-  	<video playsinline="" autoplay="" muted="" loop="" poster="/videos/v4/cover.jpg">
-    	<source src="/videos/v4/cover.mp4" type="video/mp4"/>
-		</video>
-	</div>
+	<div class="overlay"></div>
 
 	<div class="wrapper">
 		<div class="chat">
 	    <div class="chat-head">
-	      <h1>Geobot</h1>
+	      <h1>🌍 Geobot</h1>
 	    </div>
 	    <div class="chat-panel"></div>
 	    <div class="chat-form">
         <form>
           <input type="text" placeholder="Type message...">
-          <button type="submit">Send</button>
+          <input type="submit" value="Send">
         </form>
 	    </div>
 	  </div>
