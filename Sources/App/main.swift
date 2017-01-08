@@ -1,3 +1,4 @@
+import Foundation
 import Vapor
 import Sessions
 
@@ -22,22 +23,29 @@ let chat = Chat()
 drop.socket("chat") { request, ws in
   let session = try request.session()
   session.data["geobot"] = "connected"
-  var id = session.identifier
+  var id = session.identifier ?? UUID().uuidString
+
+  let witConfig = WitConfig(
+    token: "L6YMXZKZJRRB7BBBFYJE7CNTNKGQEDLS",
+    version: "20160526",
+    sessionId: id)
+
+  let actionHandler = GeoActionHandler(drop: drop)
+  let converseClient = ConverseClient(drop: drop, config: witConfig, actionHandler: actionHandler)
 
   ws.onText = { ws, text in
     let json = try JSON(bytes: Array(text.utf8))
 
-    if let id = id, let message = json.object?["message"]?.string {
+    if let message = json.object?["message"]?.string {
       chat.joinIfNeeded(id: id, ws: ws)
-      try chat.send(id: id, message: "You asked me: \(message)")
+
+      try converseClient.post(message: message) { answer in
+        try chat.send(id: id, message: answer)
+      }
     }
   }
 
   ws.onClose = { ws, _, _, _ in
-    guard let id = id else {
-      return
-    }
-
     chat.connections.removeValue(forKey: id)
   }
 }
