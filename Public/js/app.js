@@ -1,9 +1,9 @@
 // Form
 
-var chat = new Chat(window.location.host + "/chat");
+var chat = new Chat(window.location.host + '/chat');
 
 $(function() {
-  $("form").submit(function(event) {
+  $('form').submit(function(event) {
     event.preventDefault();
     var input = $(this).find('input:text');
     var message = input.val();
@@ -11,6 +11,7 @@ $(function() {
       return;
     }
 
+    input.prop('disabled', true);
     chat.send(message);
     input.val('');
   });
@@ -23,7 +24,7 @@ function Chat(host) {
   this.ws = new WebSocket('ws://' + host);
 
   this.ws.onopen = function() {
-    console.log("Socket is open");
+    console.log('Socket is open');
   };
 
   this.ws.onmessage = function(event) {
@@ -67,7 +68,6 @@ function Chat(host) {
       div.addClass('answer');
     }
 
-    console.log(text);
     div.text(text);
 
     $('.chat-panel').append(div);
@@ -80,5 +80,7 @@ function Chat(host) {
 
     var firstDiv = $('.chat-panel')[0];
     firstDiv.scrollTop = firstDiv.scrollHeight;
+
+    $('form').find('input:text').prop('disabled', false);
   }
 };

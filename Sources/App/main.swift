@@ -21,9 +21,7 @@ drop.get { req in
 let chat = Chat()
 
 drop.socket("chat") { request, ws in
-  let session = try request.session()
-  session.data["geobot"] = "connected"
-  var id = session.identifier ?? UUID().uuidString
+  let id = UUID().uuidString
 
   let witConfig = WitConfig(
     token: "L6YMXZKZJRRB7BBBFYJE7CNTNKGQEDLS",

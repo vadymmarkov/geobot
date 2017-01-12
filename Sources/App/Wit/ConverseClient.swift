@@ -9,8 +9,6 @@ protocol ConverseActionHandler {
   func handleAction(on converse: Converse, context: Node) -> Node
 }
 
-
-
 final class ConverseClient: WitClient {
   typealias ConverseCallback = (String) throws -> Void
 
