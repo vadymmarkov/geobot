@@ -10,7 +10,7 @@ protocol ConverseActionHandler {
 }
 
 final class ConverseClient: WitClient {
-  typealias ConverseCallback = (String) throws -> Void
+  typealias ConverseCallback = (Node) throws -> Void
 
   let path = "converse"
   let drop: Droplet
@@ -46,7 +46,8 @@ final class ConverseClient: WitClient {
       try post(context: context, callback: callback)
     case .message:
       if let answer = converse.message {
-        try callback(answer)
+        let node = Node.object(["message": Node.string(answer)])
+        try callback(node)
       }
       
       try post(context: context, callback: callback)

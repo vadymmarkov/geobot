@@ -11,11 +11,12 @@ class Chat {
     connections[id] = ws
   }
 
-  func send(id: String, message: String) throws {
+  func send(id: String, node: Node) throws {
     guard let connection = connections[id] else {
       return
     }
 
-    try connection.send(message)
+    let json = try JSON(node: node).serialize().string()
+    try connection.send(json)
   }
 }

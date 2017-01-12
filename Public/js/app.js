@@ -11,9 +11,9 @@ $(function() {
       return;
     }
 
+    input.val('');
     input.prop('disabled', true);
     chat.send(message);
-    input.val('');
   });
 });
 
@@ -28,7 +28,8 @@ function Chat(host) {
   };
 
   this.ws.onmessage = function(event) {
-    var message = event.data;
+    var data = JSON.parse(event.data);
+    var message = data.message;
     console.log(message);
     chat.append(message, true);
   }
@@ -76,11 +77,11 @@ function Chat(host) {
 
     if (!isAnswer) {
       this.startAnimation()
+    } else {
+      $('form').find('input:text').prop('disabled', false);
     }
 
     var firstDiv = $('.chat-panel')[0];
     firstDiv.scrollTop = firstDiv.scrollHeight;
-
-    $('form').find('input:text').prop('disabled', false);
   }
 };

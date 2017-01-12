@@ -42,7 +42,7 @@ drop.socket("chat") { request, ws in
       chat.joinIfNeeded(id: id, ws: ws)
 
       try converseClient.post(message: message) { answer in
-        try chat.send(id: id, message: answer)
+        try chat.send(id: id, node: answer)
       }
     }
   }
