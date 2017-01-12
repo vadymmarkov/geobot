@@ -21,10 +21,14 @@ drop.get { req in
 let chat = Chat()
 
 drop.socket("chat") { request, ws in
+  guard let token = Env.get("WIT_TOKEN") ?? drop.config["wit", "token"]?.string else {
+    return
+  }
+
   let id = UUID().uuidString
 
   let witConfig = WitConfig(
-    token: "L6YMXZKZJRRB7BBBFYJE7CNTNKGQEDLS",
+    token: token,
     version: "20160526",
     sessionId: id)
 

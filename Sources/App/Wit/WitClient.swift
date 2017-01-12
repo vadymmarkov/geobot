@@ -1,18 +1,14 @@
 import Vapor
 import HTTP
 
-struct WitConfig {
-  var token = "L6YMXZKZJRRB7BBBFYJE7CNTNKGQEDLS"
-  var version = "20160526"
-  var sessionId = ""
-}
-
 protocol WitClient {
   var drop: Droplet { get }
   var config: WitConfig { get }
 }
 
 extension WitClient {
+
+  // MARK: - Configs
 
   var baseUrl: String {
     return "https://api.wit.ai/"
@@ -33,6 +29,8 @@ extension WitClient {
     ]
   }
 
+  // MARK: - API
+
   func request(_ method: Method,
                path: String,
                query: [String: CustomStringConvertible] = [:],
@@ -46,6 +44,7 @@ extension WitClient {
     let uri = "\(baseUrl)\(path)"
     let json = try JSON(node: context)
     let body = try Body.data(json.makeBytes())
+
     return try drop.client.request(method, uri, headers: headers, query: requestQuery, body: body)
   }
 }

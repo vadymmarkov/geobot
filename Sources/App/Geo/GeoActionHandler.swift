@@ -9,6 +9,8 @@ struct GeoActionHandler: ConverseActionHandler {
     self.client = GeoClient(drop: drop)
   }
 
+  // MARK: - Action handling
+
   func handleAction(on converse: Converse, context: Node) -> Node {
     guard let action = converse.action else {
       return context
@@ -48,14 +50,10 @@ struct GeoActionHandler: ConverseActionHandler {
     return context
   }
 
+  // MARK: - Helpers
+
   func update(context: Node, from converse: Converse, update: (Country, Node) -> Node) -> Node {
     var context = context
-
-    if var object = context.nodeObject {
-      //object.removeValue(forKey: "notFound")
-      //object.removeValue(forKey: "missingEntity")
-      //context = Node(object)
-    }
 
     if let value = extractCountry(from: converse) {
       if let country = try? client.country(by: value) {

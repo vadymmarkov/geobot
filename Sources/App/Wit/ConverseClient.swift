@@ -23,6 +23,8 @@ final class ConverseClient: WitClient {
     self.actionHandler = actionHandler
   }
 
+  // MARK: - API
+
   func post(message: String? = nil, context: Node = Node.object([:]), callback: ConverseCallback) throws {
     var query: [String: CustomStringConvertible] = [:]
 
