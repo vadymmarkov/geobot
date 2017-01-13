@@ -9,10 +9,8 @@ protocol ConverseActionHandler {
   func handleAction(on converse: Converse, context: Node) -> Node
 }
 
-
-
 final class ConverseClient: WitClient {
-  typealias ConverseCallback = (String) throws -> Void
+  typealias ConverseCallback = (Node) throws -> Void
 
   let path = "converse"
   let drop: Droplet
@@ -24,6 +22,8 @@ final class ConverseClient: WitClient {
     self.config = config
     self.actionHandler = actionHandler
   }
+
+  // MARK: - API
 
   func post(message: String? = nil, context: Node = Node.object([:]), callback: ConverseCallback) throws {
     var query: [String: CustomStringConvertible] = [:]
@@ -46,7 +46,15 @@ final class ConverseClient: WitClient {
       try post(context: context, callback: callback)
     case .message:
       if let answer = converse.message {
-        try callback(answer)
+        var node = Node.object([
+          "message": Node.string(answer)
+        ])
+
+        if let quickReplies = converse.quickReplies {
+          node["quickReplies"] = try quickReplies.makeNode()
+        }
+
+        try callback(node)
       }
       
       try post(context: context, callback: callback)

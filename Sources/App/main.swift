@@ -21,12 +21,14 @@ drop.get { req in
 let chat = Chat()
 
 drop.socket("chat") { request, ws in
-  let session = try request.session()
-  session.data["geobot"] = "connected"
-  var id = session.identifier ?? UUID().uuidString
+  guard let token = Env.get("WIT_TOKEN") ?? drop.config["wit", "token"]?.string else {
+    return
+  }
+
+  let id = UUID().uuidString
 
   let witConfig = WitConfig(
-    token: "L6YMXZKZJRRB7BBBFYJE7CNTNKGQEDLS",
+    token: token,
     version: "20160526",
     sessionId: id)
 
@@ -40,7 +42,7 @@ drop.socket("chat") { request, ws in
       chat.joinIfNeeded(id: id, ws: ws)
 
       try converseClient.post(message: message) { answer in
-        try chat.send(id: id, message: answer)
+        try chat.send(id: id, node: answer)
       }
     }
   }
