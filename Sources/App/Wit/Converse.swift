@@ -12,6 +12,7 @@ struct Converse: JSONInitializable {
   let action: String?
   let message: String?
   let entities: JSON?
+  let quickReplies: [String]?
   let confidence: Double
 
   init(json: JSON) throws {
@@ -20,5 +21,6 @@ struct Converse: JSONInitializable {
     message = try json.extract("msg")
     entities = try json.extract("entities")
     confidence = try json.extract("confidence")
+    quickReplies = try json.extract("quickreplies")
   }
 }

@@ -12,8 +12,17 @@ $(function() {
     }
 
     input.val('');
-    input.prop('disabled', true);
+    chat.enableInput(false);
     chat.send(message);
+  });
+
+  $('body').on('click', '.chat-replies button:not(.disabled)', function(event) {
+    $(this).closest('.chat-replies').find('button').each(function() {
+      $(this).addClass('disabled');
+    });
+
+    $(this).addClass('selected');
+    chat.send($(this).text());
   });
 });
 
@@ -29,9 +38,11 @@ function Chat(host) {
 
   this.ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
-    var message = data.message;
-    console.log(message);
-    chat.append(message, true);
+    chat.append(data.message, true);
+
+    if (data.quickReplies) {
+      chat.appendQuickReplies(data.quickReplies);
+    }
   }
 
   this.send = function(message) {
@@ -76,11 +87,43 @@ function Chat(host) {
     this.stopAnimation();
 
     if (!isAnswer) {
-      this.startAnimation()
+      this.startAnimation();
     } else {
-      $('form').find('input:text').prop('disabled', false);
+      this.enableInput(this);
     }
 
+    this.scrollToBottom();
+  }
+
+  this.appendQuickReplies = function(quickReplies) {
+    var div = $('<div>').addClass('chat-replies');
+    var ul = $('<ul>');
+
+    for (i = 0; i < quickReplies.length; i++) {
+      var button = $('<button/>', {
+        text: quickReplies[i]
+      });
+
+      ul.append($('<li>').append(button));
+    }
+
+    div.append(ul);
+    $('.chat-panel').append(div);
+
+    chat.enableInput(false);
+    this.scrollToBottom();
+  }
+
+  this.enableInput = function(enabled) {
+    var input = $('form').find('input:text');
+    input.prop('disabled', !enabled);
+
+    if (enabled) {
+      input.focus();
+    }
+  }
+
+  this.scrollToBottom = function(enabled) {
     var firstDiv = $('.chat-panel')[0];
     firstDiv.scrollTop = firstDiv.scrollHeight;
   }

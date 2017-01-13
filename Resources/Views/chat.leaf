@@ -12,7 +12,8 @@
 	    <div class="chat-head">
 	      <h1>🌍 Geobot</h1>
 	    </div>
-	    <div class="chat-panel"></div>
+	    <div class="chat-panel">
+			</div>
 	    <div class="chat-form">
         <form>
           <input type="text" placeholder="Type message...">

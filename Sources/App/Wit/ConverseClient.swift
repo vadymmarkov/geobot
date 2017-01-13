@@ -46,7 +46,14 @@ final class ConverseClient: WitClient {
       try post(context: context, callback: callback)
     case .message:
       if let answer = converse.message {
-        let node = Node.object(["message": Node.string(answer)])
+        var node = Node.object([
+          "message": Node.string(answer)
+        ])
+
+        if let quickReplies = converse.quickReplies {
+          node["quickReplies"] = try quickReplies.makeNode()
+        }
+
         try callback(node)
       }
       

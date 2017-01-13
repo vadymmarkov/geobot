@@ -57,12 +57,13 @@ body {
 /* Chat head */
 
 .chat-head {
+	z-index: 100;
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
   height: 40px;
-	padding: 10px 20px;
+	padding: 7px 20px;
 	border-radius: 10px 10px 0 0;
 	background: #333;
   text-align: left;
@@ -120,6 +121,39 @@ body {
 	color: #70808B;
 }
 
+/* Quick replies */
+
+.chat-replies {
+	position: relative;
+	float: right;
+  margin: 0 10px 5px 10px;
+  clear: both;
+}
+
+.chat-replies ul {
+	margin: 7px 0;
+}
+
+.chat-replies li {
+	display: inline;
+	margin: 0 5px;
+}
+
+.chat-replies li button {
+	padding: 10px;
+	background-color: transparent;
+	color: #70808B;
+	border: 1px solid #70808B;
+	font-size: 16px;
+	border-radius: 15px;
+}
+
+.chat-replies li button:not(.disabled):hover, .chat-replies li button.selected {
+	background-color: #70808B;
+	color: #fff;
+	border: 1px solid #70808B;
+}
+
 /* Chat form */
 
 .chat-form {
@@ -131,7 +165,7 @@ body {
   width: 100%;
 	border-radius: 0 0 10px 10px;
 	border-top: 1px solid #e5e5e5;
-	background: rgba(255, 255, 255, 0.8);
+	background: #fff;
 }
 
 .chat-form form {
