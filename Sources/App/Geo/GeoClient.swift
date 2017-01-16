@@ -20,8 +20,12 @@ struct GeoClient {
   // MARK: - API
 
   func country(by name: String) throws -> Country {
-    let name = name.lowercased()
-    let response = try drop.client.get("\(baseUrl)/name/\(name)", headers: headers)
+    guard let name = name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+      throw Failure.invalidParameters
+    }
+
+    let endpoint = "\(baseUrl)/name/\(name)"
+    let response = try drop.client.get(endpoint, headers: headers)
 
     guard let json = response.json?.node.nodeArray?.first else {
       throw Failure.invalidResponse

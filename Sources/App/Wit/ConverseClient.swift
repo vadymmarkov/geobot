@@ -2,6 +2,7 @@ import Vapor
 import HTTP
 
 enum Failure: Error {
+  case invalidParameters
   case invalidResponse
 }
 
