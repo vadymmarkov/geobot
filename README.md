@@ -12,6 +12,8 @@ A simple chat bot to work with https://restcountries.eu API, using Wit.ai.
 
 ## Test it out
 
+![Targets](https://github.com/vadymmarkov/geobot/blob/master/Images/geobot.gif)
+
 - Don't be shy, just Say Hi! Don't leave [Geobot](https://geobot-swift.herokuapp.com)
 alone.
 - Don't forget to check [Wit Console](https://wit.ai/vadymmarkov/geobot) to
