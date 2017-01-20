@@ -8,7 +8,7 @@ let sessionsMiddleware = SessionsMiddleware(sessions: memorySessions)
 
 let drop = Droplet()
 drop.addConfigurable(middleware: sessionsMiddleware, name: "sessions")
-drop.client = FoundationClient.self
+//drop.client = FoundationClient.self
 
 // MARK: - HTTP
 
