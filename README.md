@@ -48,7 +48,7 @@ real AI stuff? Be my guest!
 export [geobot app](https://wit.ai/vadymmarkov/geobot) and import it when
 creating your new mind-blowing app.
 - Find the `Server Access Token` under Settings page in the **Wit.ai** console.
-- Set your token as environment variable `WIT_TOKEN` or alternatively create
+- Set your token as `WIT_TOKEN` environment variable or, alternatively, create
 a new config file `geobot/Config/secrets/wit.json`:
 
 ```json
