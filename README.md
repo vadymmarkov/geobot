@@ -24,7 +24,7 @@ alone.
 see all the magic behind it.
 
 <div align="center">
-![Geobot](https://github.com/vadymmarkov/geobot/blob/master/Images/geobot.gif)
+<img src="https://github.com/vadymmarkov/geobot/blob/master/Images/geobot.gif" alt="Geobot" width="494" height="647" />
 </div>
 
 ## 🌍 Features
