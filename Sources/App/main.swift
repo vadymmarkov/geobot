@@ -23,7 +23,7 @@ drop.get { req in
 let chat = Chat()
 
 drop.socket("chat") { request, ws in
-  guard let token = Env.get("WIT_TOKEN") ?? drop.config["wit", "token"]?.string else {
+  guard let token = drop.config["wit", "token"]?.string ?? Env.get("WIT_TOKEN") else {
     return
   }
 
