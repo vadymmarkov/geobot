@@ -1,6 +1,7 @@
 // Form
 
-var chat = new Chat(window.location.host + '/chat');
+var protocol = location.protocol == 'https:' ? 'wss://' : 'ws://';
+var chat = new Chat(protocol + window.location.host + '/chat');
 
 $(function() {
   $('form').submit(function(event) {
@@ -28,9 +29,9 @@ $(function() {
 
 // Web sockets
 
-function Chat(host) {
+function Chat(url) {
   this.interval = null;
-  this.ws = new WebSocket('ws://' + host);
+  this.ws = new WebSocket(url);
 
   this.ws.onopen = function() {
     console.log('Socket is open');
