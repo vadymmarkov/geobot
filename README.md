@@ -6,41 +6,49 @@
 ![Swift](https://img.shields.io/badge/%20in-swift%203.0.1-orange.svg)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-[Wit.ai](https://wit.ai) chat bot built with [Vapor](https://github.com/vapor/vapor) Swift web framework.
+A simple chat bot built using [Wit.ai](https://wit.ai) and
+[Vapor](https://github.com/vapor/vapor) Swift web framework, which aims to
+help you with the things you missed while playing hooky from geography classes
+back in school 😀.
 
-A simple chat bot to work with https://restcountries.eu API, using Wit.ai.
+If you don't know about [Wit.ai](https://wit.ai) yet, drop everything you're
+doing and go check it out. It is an open and extensible natural language
+platform, bot engine and intent parser to build applications and devices that
+you can talk or text to.
 
-## Test it out
-
-![Targets](https://github.com/vadymmarkov/geobot/blob/master/Images/geobot.gif)
+## 🤖 Test it out
 
 - Don't be shy, just Say Hi! Don't leave [Geobot](https://geobot-swift.herokuapp.com)
 alone.
 - Don't forget to check [Wit Console](https://wit.ai/vadymmarkov/geobot) to
 see all the magic behind it.
 
-## Features
+<div align="center">
+![Geobot](https://github.com/vadymmarkov/geobot/blob/master/Images/geobot.gif)
+</div>
+
+## 🌍 Features
 
 - [x] Greetings
 - [x] Help and quick replies
 - [x] Capitals
 - [x] Location of countries in the world
 - [x] Area of countries
-- [x] Population of Countries
+- [x] Population of countries
 
-## Playground
+## 🎮 Playground
 
 Do you want to setup the project locally and pretend that you're doing some
 real AI stuff? Be my guest!
 
-### Setup Wit.ai
+### Wit.ai
 
 - [Sign up](https://wit.ai) for a **Wit.ai** account.
-- Follow the [guidelines](https://wit.ai/docs/recipes#manage-link) on how to export
-[geobot app](https://wit.ai/vadymmarkov/geobot) and import it when creating
-your new mind-blowing app.
-- Find the app token under Settings page in the **Wit.ai** console.
-- Set environment variable `WIT_TOKEN` with your token or alternatively create
+- Follow the [guidelines](https://wit.ai/docs/recipes#manage-link) on how to
+export [geobot app](https://wit.ai/vadymmarkov/geobot) and import it when
+creating your new mind-blowing app.
+- Find the `Server Access Token` under Settings page in the **Wit.ai** console.
+- Set your token as environment variable `WIT_TOKEN` or alternatively create
 a new config file `geobot/Config/secrets/wit.json`:
 
 ```json
@@ -49,7 +57,7 @@ a new config file `geobot/Config/secrets/wit.json`:
 }
 ```
 
-### Setup project
+### Swift project
 
 ```sh
 git clone https://github.com/vadymmarkov/geobot.git
@@ -58,7 +66,7 @@ swift build
 .build/debug/App
 ```
 
-# Resources
+# 🛠 Tools & Resources
 
 - [Wit.ai Quick start](https://wit.ai/docs/quickstart)
 - [Vapor documentation](https://vapor.github.io/documentation/)
@@ -70,7 +78,7 @@ Vadym Markov, markov.vadym@gmail.com
 
 ## Contributing
 
-We would love you to contribute to **Geobot**, check the [CONTRIBUTING](https://github.com/vadymmarkov/geobot/blob/master/CONTRIBUTING.md)
+Check the [CONTRIBUTING](https://github.com/vadymmarkov/geobot/blob/master/CONTRIBUTING.md)
 file for more info.
 
 ## License
