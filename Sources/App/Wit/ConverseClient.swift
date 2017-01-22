@@ -1,11 +1,6 @@
 import Vapor
 import HTTP
 
-enum Failure: Error {
-  case invalidParameters
-  case invalidResponse
-}
-
 protocol ConverseActionHandler {
   func handleAction(on converse: Converse, context: Node) -> Node
 }
@@ -33,12 +28,7 @@ final class ConverseClient: WitClient {
       query["q"] = message
     }
 
-    let response = try request(.post, path: path, query: query, context: context)
-
-    guard let json = response.json else {
-      throw Failure.invalidResponse
-    }
-
+    let json = try request(.post, path: path, query: query, context: context)
     let converse = try Converse(json: json)
 
     switch converse.type {
