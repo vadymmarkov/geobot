@@ -71,6 +71,7 @@ swift build
 - [Wit.ai Quick start](https://wit.ai/docs/quickstart)
 - [Vapor documentation](https://vapor.github.io/documentation/)
 - [REST Countries API](https://restcountries.eu)
+- [SwiftyCurl](https://github.com/dmcyk/SwiftyCurl)
 
 ## Author
 
