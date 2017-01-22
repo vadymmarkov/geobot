@@ -14,7 +14,7 @@ extension WitClient {
     return "https://api.wit.ai/"
   }
 
-  var headers: [HeaderKey: String] {
+  var headers: [String: String] {
     return [
       "Authorization" : "Bearer \(config.token)",
       "Accept" : "application/json",
@@ -34,17 +34,17 @@ extension WitClient {
   func request(_ method: Method,
                path: String,
                query: [String: CustomStringConvertible] = [:],
-               context: Node) throws -> Response {
+               context: Node) throws -> JSON {
     var requestQuery = self.query
 
     query.forEach { key, value in
       requestQuery[key] = value
     }
 
-    let uri = "\(baseUrl)\(path)"
+    let url = "\(baseUrl)\(path)"
     let json = try JSON(node: context)
-    let body = try Body.data(json.makeBytes())
-
-    return try drop.client.request(method, uri, headers: headers, query: requestQuery, body: body)
+    let curlClient = CURLClient()
+    
+    return try curlClient.request(method, url: url, query: requestQuery, headers: headers, body: json)
   }
 }

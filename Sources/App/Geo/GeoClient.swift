@@ -1,12 +1,19 @@
 import Foundation
 import Vapor
 import HTTP
+import SwiftyCurl
 
 struct GeoClient {
+
+  enum Failure: Error {
+    case invalidParameters
+    case invalidResponse
+  }
+
   let baseUrl = "https://restcountries.eu/rest/v1"
   let drop: Droplet
 
-  var headers: [HeaderKey: String] {
+  var headers: [String: String] {
     return [
       "Accept" : "application/json",
       "Content-Type" : "application/json"
@@ -24,10 +31,11 @@ struct GeoClient {
       throw Failure.invalidParameters
     }
 
-    let endpoint = "\(baseUrl)/name/\(name)"
-    let response = try drop.client.get(endpoint, headers: headers)
+    let url = "\(baseUrl)/name/\(name)"
+    let curlClient = CURLClient()
+    let data = try curlClient.request(.get, url: url, headers: headers)
 
-    guard let json = response.json?.node.nodeArray?.first else {
+    guard let json = data.node.nodeArray?.first else {
       throw Failure.invalidResponse
     }
 
